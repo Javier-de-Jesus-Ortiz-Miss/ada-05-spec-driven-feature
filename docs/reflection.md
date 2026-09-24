@@ -1,16 +1,49 @@
-# Reflexión ADA-05 — borrador para revisión personal
+# Reflexión — ADA-05
 
-Estas respuestas describen el trabajo observado en el repositorio. El estudiante debe revisarlas y adaptarlas a su propia experiencia antes de entregarlas como reflexión personal.
+1. **¿Qué diferencia hay entre requirement, specification y prompt?**
 
-1. **Requirement, specification y prompt:** El requisito expresa una necesidad con ID estable; la especificación define reglas y criterios verificables; el prompt indica a un agente qué trabajo ejecutar en un momento concreto.
-2. **Información indispensable antes de programar:** Historia de usuario, campos de cliente, alcance local, búsqueda por nombre o correo y comportamiento esperado para entradas inválidas y sin coincidencias.
-3. **Decisiones previas:** CLI en vez de HTTP, datos ficticios en memoria, orden de entrada, normalización del término y salida de errores.
-4. **Errores evitados por SPEC.md:** Evitó tratar la ausencia de coincidencias como error, duplicar un cliente que coincide en ambos campos y dejar indefinidos los códigos de salida.
-5. **Separación de REQUIREMENTS.md y SPEC.md:** Impide mantener dos definiciones distintas de un requisito. SPEC referencia IDs y explica cómo comprobarlos.
-6. **Papel de AGENTS.md:** Ordena leer los documentos y trabajar por tareas, con pruebas y sin alterar requisitos para acomodar el código.
-7. **Cambios durante revisión humana:** No consta todavía una revisión personal del estudiante. Codex corrigió el README tardío de `agy` para que usara el extra `test` real y describiera la CLI implementada.
-8. **Arquitectura y código final:** Coinciden los módulos de datos, modelo, búsqueda y CLI; la búsqueda no imprime y la CLI no contiene reglas de coincidencia.
-9. **Requisito más difícil de probar:** NFR-02, porque demostrar ausencia de dependencia de red combina una prueba de ejecución con inspección de dependencias y código.
-10. **Mejora del proceso:** Dar a `agy` un entorno interactivo con permisos claros y comprobar su salida antes de avanzar a la tarea siguiente.
-11. **SPEC.md como contrato:** Sus criterios de aceptación y escenarios permiten comprobar cada ID sin copiar la definición del requisito.
-12. **Decisiones del AI Usage Log:** Se pasó de un alcance abierto a CLI en memoria; después se eligieron función pura y `casefold()`. La revisión de pruebas corrigió la documentación y dejó explícito qué aportó `agy` y qué realizó Codex.
+   El requirement describe una necesidad que debe resolver el programa. La specification detalla cómo debe comportarse la solución y cómo comprobar que cumple esa necesidad. El prompt es la instrucción que se le da a la IA para realizar una tarea. En este proyecto, buscar clientes por correo es un requisito; aceptar coincidencias parciales y definir la respuesta cuando no hay resultados forma parte de la especificación.
+
+2. **¿Qué información fue indispensable antes de programar?**
+
+   Fue necesario definir los datos de cada cliente, los campos de búsqueda y el comportamiento esperado ante entradas vacías o búsquedas sin coincidencias. También debía quedar claro el alcance del proyecto. Esa información permitió orientar la implementación y establecer qué resultados se considerarían correctos.
+
+3. **¿Qué decisiones debieron resolverse antes de programar?**
+
+   Se definió utilizar una CLI con clientes ficticios en memoria. Aprobé esta propuesta porque permite demostrar la búsqueda sin añadir una base de datos o una interfaz web. También quedaron establecidas las coincidencias parciales, la comparación sin distinguir mayúsculas y la conservación del orden de entrada.
+
+4. **¿Qué errores evitó SPEC.md?**
+
+   Ayudó a evitar interpretaciones distintas sobre el comportamiento de la búsqueda. Por ejemplo, establece que no encontrar clientes es un resultado válido, mientras que introducir un término vacío es un error. También aclara que un cliente que coincide por nombre y correo debe aparecer una sola vez.
+
+5. **¿Qué problema evita separar REQUIREMENTS.md de SPEC.md?**
+
+   Evita mantener varias definiciones de un mismo requisito. `REQUIREMENTS.md` concentra las necesidades del producto y `SPEC.md` las referencia mediante sus identificadores para describir reglas y criterios de aceptación. Esto facilita localizar un cambio y revisar qué partes del proyecto podrían verse afectadas.
+
+6. **¿Qué papel tuvo AGENTS.md?**
+
+   Funcionó como una guía para el trabajo del agente. Indicó qué documentos debía consultar, cómo seguir las tareas y qué verificaciones realizar. También estableció límites, como no modificar los requisitos para hacer pasar las pruebas ni eliminar pruebas que detectaran problemas.
+
+7. **¿Qué cambió durante la revisión humana?**
+
+   Leí y aprobé los documentos y la implementación, y confirmé esa revisión al cierre. Mantuve el alcance y el comportamiento presentados. Aporté ideas y ajustes para explicar mejor el trabajo y mi participación, y la IA ayudó a redactarlos. La corrección técnica del README y la ejecución de las pruebas fueron realizadas por Codex.
+
+8. **¿La arquitectura coincidió con el código final?**
+
+   Sí. El código conserva la separación entre el modelo de cliente, los datos de ejemplo, la búsqueda y la CLI. Cada módulo tiene una responsabilidad concreta. La función de búsqueda devuelve resultados sin imprimirlos, mientras que la CLI recibe los argumentos y muestra la respuesta. Esto permite probar la lógica con diferentes datos.
+
+9. **¿Qué requisito fue más difícil de probar?**
+
+   Considero que NFR-02 requirió una verificación más amplia, porque comprobar la ejecución local no depende únicamente de obtener una respuesta correcta. También hay que revisar que el código no necesite servicios externos ni credenciales. La aplicación utiliza la biblioteca estándar de Python durante su ejecución; `pytest` se utiliza para las pruebas.
+
+10. **¿Qué mejorarías en tu proceso spec-driven?**
+
+    Verificaría los permisos y el funcionamiento de `agy` antes de iniciar la implementación. También guardaría el reporte de cada tarea y registraría las revisiones conforme se realizan. Así sería más fácil identificar qué terminó el agente, qué problemas encontró y qué decisiones se aprobaron en cada momento.
+
+11. **¿Por qué SPEC.md puede funcionar como contrato verificable sin duplicar los requisitos?**
+
+    Porque relaciona cada requisito con comportamientos observables y criterios de aceptación. Por ejemplo, FR-06 se comprueba mediante entradas vacías o compuestas por espacios, junto con el mensaje y el código de salida correspondientes. La especificación permite verificar ese comportamiento utilizando el ID del requisito, sin volver a definirlo.
+
+12. **¿Qué decisiones importantes aparecen en tu AI Usage Log y cómo cambió tu criterio después de revisar las sugerencias de la IA?**
+
+    El registro incluye la propuesta de requisitos, el uso de una CLI con datos en memoria, la separación de la búsqueda y la comparación mediante `casefold()`. Las propuestas dieron una forma concreta al objetivo general del ADA. Leí y aprobé el contenido presentado, manteniendo el alcance de una solución pequeña y verificable. La IA redactó los documentos, implementó el código y ejecutó las pruebas; mi revisión y aprobación quedaron registradas al cierre.

@@ -54,5 +54,5 @@ pytest -v
 - `AGENTS.md`: instrucciones para el agente.
 - `docs/traceability.md`: requisito → criterio → tarea → código → prueba.
 - `AI_USAGE_LOG.md`: decisiones e interacciones relevantes de IA.
-- `results/agent-report.md`: ejecución, verificación y límites de la revisión humana.
-- `docs/reflection.md`: respuestas de reflexión académica para revisión del estudiante.
+- `results/agent-report.md`: secuencia de trabajo, verificaciones y revisión personal.
+- `docs/reflection.md`: reflexión sobre las decisiones y el proceso del proyecto.

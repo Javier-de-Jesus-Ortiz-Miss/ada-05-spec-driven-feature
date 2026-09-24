@@ -32,6 +32,10 @@ Como usuario, quiero buscar clientes por nombre o correo electrónico para encon
 - **A-01:** La primera versión será una CLI de Python con datos en memoria; no requiere base de datos ni API HTTP.
 - **A-02:** Los registros de clientes ya existen al ejecutar la búsqueda. Crear, editar o eliminar clientes queda fuera de esta feature.
 
-## Estado de revisión
+## Decisiones de alcance
 
-Al solicitar completar todo el ADA, el estudiante delegó la elección de las opciones propuestas en el borrador de la fase 1. Se adoptan Q-01, Q-02 y A-01 para el alcance de esta entrega; la revisión académica personal queda a cargo del estudiante.
+El proyecto usa una CLI y clientes ficticios en memoria porque el objetivo es demostrar la búsqueda y sus pruebas. Se conserva el orden de entrada para evitar añadir una regla de clasificación que no necesita esta versión. Estas decisiones corresponden a Q-01, Q-02 y A-01.
+
+## Revisión del documento
+
+La IA propuso y redactó la lista de requisitos. El estudiante confirmó al cierre su lectura, revisión y aprobación del contenido y del alcance.

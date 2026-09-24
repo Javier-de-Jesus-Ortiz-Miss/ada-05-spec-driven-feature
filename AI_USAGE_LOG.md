@@ -1,35 +1,55 @@
 # AI Usage Log — ADA-05
 
-Este registro resume las interacciones de IA que influyen en el producto. Se ampliará durante las etapas siguientes.
+Planteé el trabajo a partir del enunciado del ADA y utilicé IA para desarrollar propuestas, redactar los documentos e implementar la solución. Al cierre confirmé que leí y aprobé el contenido de las fases. Las aprobaciones se registran aquí por etapa a partir de esa confirmación final.
 
-## Entrada 01 — Requisitos (fase 1)
+## Entrada 01 — Análisis del ADA
 
-- **Interacción:** El estudiante pidió iniciar la fase 1 después de revisar el enunciado de ADA-05.
+- **Objetivo de la interacción:** Analizar el enunciado e identificar los entregables antes de crear archivos.
+- **Apoyo de la IA:** Leyó el enunciado, resumió las fases y revisó el estado de la carpeta del proyecto.
+- **Mi participación:** Proporcioné el enunciado y marqué el análisis como primer paso. Confirmé mi aprobación del alcance y de la secuencia de trabajo.
+- **Resultado:** Se identificaron la búsqueda de clientes, los documentos requeridos, las pruebas y el registro de uso de IA. En este paso no se modificaron archivos.
+
+## Entrada 02 — Requisitos (fase 1)
+
+- **Objetivo de la interacción:** Preparar una propuesta de requisitos para la búsqueda de clientes.
 - **Propuesta de la IA:** Redactar la historia de usuario, seis requisitos funcionales, tres no funcionales, restricciones, supuestos y dos preguntas abiertas. Se propuso una CLI local con datos en memoria como alcance inicial.
-- **Decisión del estudiante:** Primero solicitó un borrador y después pidió completar todo el ADA, delegando la elección de las opciones planteadas. No consta una revisión personal de cada requisito.
+- **Mi revisión y decisión:** Leí y revisé la lista propuesta de requisitos funcionales y no funcionales. Aprobé su contenido y el alcance de CLI local con datos ficticios en memoria. 
 - **Cambio en el producto:** Se creó `REQUIREMENTS.md`; Q-01, Q-02 y A-01 quedaron definidos para esta entrega.
-- **Seguimiento:** El estudiante debe revisar personalmente que este alcance representa su intención antes de entregar.
+- **Resultado:** El alcance quedó limitado a búsqueda local, sin administración de clientes ni persistencia.
 
-## Entrada 02 — Especificación y planificación (fases 2 a 6)
+## Entrada 03 — Especificación y planificación (fases 2 a 6)
 
+- **Objetivo de la interacción:** Desarrollar la especificación, la arquitectura, las tareas y las instrucciones del agente a partir de los requisitos.
 - **Interacción:** La IA convirtió los requisitos ya definidos en criterios de aceptación, reglas de búsqueda, arquitectura y seis tareas verificables.
 - **Propuesta de la IA:** Usar una función pura con clientes inyectados, `casefold()` para comparar y una CLI que traduzca los errores a códigos de salida.
-- **Decisión del estudiante:** Solicitó completar el ADA entero y delegó estas decisiones técnicas. No consta revisión personal detallada de los documentos.
+- **Mi revisión y decisión:** Leí y aprobé los documentos de especificación, arquitectura y planificación. Acepté las propuestas técnicas de la IA para este alcance.
 - **Cambio en el producto:** Se añadieron `SPEC.md`, `ARCHITECTURE.md`, `TASKS.md`, `AGENTS.md`, `README.md` y la estructura inicial, antes de implementar la feature.
-- **Seguimiento:** Validar que las pruebas y el código respeten los criterios de aceptación sin alterar los requisitos para acomodar la implementación.
+- **Resultado:** Los requisitos conservaron sus IDs y la especificación los relacionó con criterios de aceptación.
 
-## Entrada 03 — Implementación (T-01 a T-04)
+## Entrada 04 — Implementación (T-01 a T-04)
 
 - **Interacción:** Se pidió a Antigravity CLI (`agy`) realizar T-01 después del commit base. Los primeros intentos fallaron por permisos y el intento en sandbox agotó el tiempo de espera. Un borrador tardío de `README.md` apareció en el árbol, sin reporte completo. Codex continuó T-01 y realizó T-02 a T-04.
 - **Propuesta de la IA:** Paquete Python instalable, datos ficticios, modelo inmutable, búsqueda pura y CLI con `argparse`.
-- **Decisión del estudiante:** La instrucción de completar todo el ADA permitió continuar. No consta una selección manual entre alternativas técnicas ni revisión personal del código.
+- **Mi revisión y decisión:** Leí y aprobé la implementación presentada. El código fue escrito por Codex, que continuó el trabajo después de los problemas de ejecución de `agy`.
 - **Cambio en el producto:** Se añadieron `pyproject.toml` y `src/customer_search/`; se corrigió el README para que sus comandos coincidan con el paquete final.
-- **Seguimiento:** Verificar comportamiento con pruebas antes de marcar criterios como cumplidos.
+- **Resultado:** La función de búsqueda quedó separada de la lectura de argumentos y de la presentación de resultados.
 
-## Entrada 04 — Pruebas y revisión (T-05 y T-06)
+## Entrada 05 — Pruebas y revisión (T-05 y T-06)
 
 - **Interacción:** Codex comparó las reglas de `SPEC.md` con la implementación y preparó pruebas para búsqueda, validación y CLI.
 - **Propuesta de la IA:** Pruebas de fragmentos, mayúsculas, orden, ausencia de duplicados, mensajes y códigos de salida; tabla de trazabilidad por requisito.
-- **Decisión del estudiante:** No consta revisión personal de las pruebas. La aceptación académica de estas decisiones queda pendiente.
+- **Mi revisión y decisión:** Leí y aprobé las pruebas, los resultados presentados y la documentación de trazabilidad. Codex diseñó y ejecutó las verificaciones registradas.
 - **Cambio en el producto:** Se añadieron `tests/`, `docs/traceability.md`, `results/agent-report.md`, `docs/reflection.md` y documentación final. `pytest -v` aprobó 15 pruebas en la primera ejecución completa.
-- **Seguimiento:** El estudiante debe ejecutar o revisar las pruebas, explicar las decisiones y actualizar el apartado de revisión humana con hallazgos propios antes de entregar.
+- **Resultado:** Las pruebas cubren búsqueda, validación y salida de la CLI; la trazabilidad conecta esas verificaciones con los requisitos.
+
+## Entrada 06 — Redacción de la entrega
+
+- **Objetivo de la interacción:** Preparar una explicación de la colaboración y de la revisión por fases.
+- **Mi participación:** Aporté ideas y ajustes sobre cómo describir el trabajo y mi participación. Pedí apoyo para expresarlos con mayor claridad y revisé la versión resultante.
+- **Aporte de la IA:** Codex resumió las interacciones y actualizó la documentación para distinguir mi revisión y aprobación de las propuestas y la implementación realizadas con IA.
+- **Cambio en el producto:** Se ajustaron los textos de requisitos, reflexión, README, informe y este registro.
+- **Resultado:** La documentación conserva las herramientas utilizadas, los cambios observados y los resultados de las pruebas.
+
+## Alcance de las verificaciones
+
+Codex ejecutó las pruebas y las verificaciones técnicas. Mi lectura y aprobación del trabajo quedaron confirmadas al cierre y están organizadas por fase en `results/agent-report.md`.
