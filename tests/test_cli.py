@@ -3,6 +3,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 
 def run_cli(*arguments):
     env = os.environ.copy()
@@ -29,11 +31,13 @@ def test_cli_reports_no_matches():
     assert result.stdout.strip() == "No se encontraron clientes."
 
 
-def test_cli_rejects_blank_term():
-    result = run_cli("   ")
+@pytest.mark.parametrize("term", ["", "   ", "\t\n"])
+def test_cli_rejects_blank_term(term):
+    result = run_cli(term)
     assert result.returncode == 2
     assert "Error:" in result.stderr
     assert "no vacío" in result.stderr
+    assert result.stdout == ""
 
 
 def test_cli_requires_exactly_one_argument():
@@ -41,3 +45,10 @@ def test_cli_requires_exactly_one_argument():
         result = run_cli(*arguments)
         assert result.returncode == 2
         assert "usage:" in result.stderr
+
+
+def test_cli_trims_outer_spaces_and_preserves_inner_spaces():
+    result = run_cli("  ANA LÓPEZ  ")
+    assert result.returncode == 0
+    assert result.stdout.strip() == "C001 | Ana López | ana.lopez@example.com"
+    assert result.stderr == ""
