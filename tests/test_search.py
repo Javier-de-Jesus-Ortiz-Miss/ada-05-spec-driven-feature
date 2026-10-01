@@ -49,3 +49,33 @@ def test_empty_term_is_rejected(term):
 def test_non_text_term_is_rejected():
     with pytest.raises(ValueError, match="debe ser texto"):
         search_customers(None, CUSTOMERS)
+
+
+@pytest.mark.parametrize("field", ["name", "email"])
+@pytest.mark.parametrize("term", ["STRASSE", "  strasse  "])
+def test_unicode_casefold_matches_name_and_email(field, term):
+    # Unlike lower(), casefold() equates the German sharp s with ss.
+    customer = Customer(
+        "unicode",
+        "Straße" if field == "name" else "Cliente",
+        "straße@example.com" if field == "email" else "otro@example.com",
+    )
+    unrelated = Customer("other", "Bruno", "bruno@example.com")
+    assert search_customers(term, [unrelated, customer]) == [customer]
+
+
+@pytest.mark.parametrize(
+    ("term", "expected_ids"),
+    [("  ANA LÓPEZ  ", ["single"]), ("  ANA  LÓPEZ  ", ["double"])],
+)
+def test_search_preserves_internal_spaces(term, expected_ids):
+    customers = [
+        Customer("single", "Ana López", "uno@example.com"),
+        Customer("double", "Ana  López", "dos@example.com"),
+    ]
+    assert [customer.id for customer in search_customers(term, customers)] == expected_ids
+
+
+def test_search_accepts_generator_and_preserves_order():
+    customers = (customer for customer in CUSTOMERS)
+    assert search_customers("ANA", customers) == CUSTOMERS
